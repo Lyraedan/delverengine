@@ -1,3 +1,5 @@
+GameInput = {}
+
 print("Setting up lua input");
 -- Create a reference to the Java api
 input = luajava.newInstance("com.zel.lua.input.LuaInputHandler");

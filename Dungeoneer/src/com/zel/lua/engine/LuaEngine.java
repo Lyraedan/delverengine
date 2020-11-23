@@ -1,5 +1,8 @@
 package com.zel.lua.engine;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.interrupt.dungeoneer.game.Game;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import org.luaj.vm2.*;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -28,19 +31,23 @@ public class LuaEngine {
     }
 
     public void SetupAPI() {
-        LuaValue core = loadScript(scriptDir + "/ZelsLuaApi/core.lua");
-        LuaValue input = loadScript(scriptDir + "/ZelsLuaApi/input.lua");
+        LuaValue core = loadScript("/ZelsLuaApi/core.lua");
+        LuaValue input = loadScript("/ZelsLuaApi/input.lua");
     }
 
     /**
      *  Compile and load a lua script
      * */
-    public LuaValue loadScript(String path) {
-        System.out.println("Loading script " + path);
+    public LuaValue loadScript(String scriptName) {
         LuaValue compiled = null;
         try {
-            compiled = globals.load(new FileReader(path), "script").call();
+            FileHandle file = Game.findInternalFileInMods("/scripts" + scriptName);
+            Gdx.app.log("Lua Engine", "Loading scripts " + file.path());
+            if(!file.exists()) return null;
+
+            compiled = globals.load(new FileReader(file.file().getPath()), "script").call();
         } catch(Exception e) {
+            System.err.println("[Lua Engine] Failed to load script " + scriptName + " | " + e.getMessage());
             e.printStackTrace();
         }
         return compiled;
@@ -59,5 +66,35 @@ public class LuaEngine {
         }
 
         return globals.get(func).call();
+    }
+
+    /*
+     *  Call a lua function with or without parameters
+     * */
+    public Object invoke(String module, String func, Object... parameters) {
+        if(parameters != null && parameters.length > 0) {
+            LuaValue[] values = new LuaValue[parameters.length];
+            for(int i = 0; i < parameters.length; i++) {
+                values[i] = CoerceJavaToLua.coerce(parameters[i]);
+            }
+            return globals.get(module).get(func).call(LuaValue.listOf(values));
+        }
+
+        return globals.get(func).call();
+    }
+
+    public LuaValue GetFunction(String function) {
+        return globals.get(function);
+    }
+
+    public LuaValue GetFunction(String module, String function) {
+        return globals.get(module).get(function);
+    }
+
+    /**
+     * Not yet functional...
+     **/
+    public void SetVariable(String module, String var, Object val) {
+        globals.get(module).set(LuaValue.valueOf(var), LuaValue.userdataOf(val));
     }
 }

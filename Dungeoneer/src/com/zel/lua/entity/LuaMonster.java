@@ -1,6 +1,10 @@
 package com.zel.lua.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.interrupt.dungeoneer.annotations.EditorProperty;
 import com.interrupt.dungeoneer.entities.Monster;
+import com.interrupt.dungeoneer.game.Game;
 import com.interrupt.dungeoneer.game.Level;
 import com.zel.lua.engine.LuaEngine;
 import org.luaj.vm2.LuaValue;
@@ -12,25 +16,27 @@ public class LuaMonster extends Monster {
     // The lua instance of the monster class
     private Monster luaInstance;
 
-    public LuaMonster() {
-        //this.script = LuaEngine.singleton.loadScript("test_mods/lua_test/test.lua");
-    }
+    @EditorProperty(group = "Scripting")
+    public String scriptName = "/test.lua";
+
+    public LuaMonster() { }
 
     @Override
     public void init(Level level, Level.Source source) {
-        this.script = LuaEngine.singleton.loadScript(LuaEngine.singleton.scriptDir + "/test.lua");
+        this.script = LuaEngine.singleton.loadScript(scriptName); //LuaEngine.singleton.scriptDir + scriptName
         luaInstance = (Monster) LuaEngine.singleton.globals.get("monster").touserdata();
         luaInstance.init(level, source);
 
         SyncLuaWithJava();
 
-        LuaEngine.singleton.invoke("init");
+        LuaEngine.singleton.GetFunction("ScriptableMonster", "init").call();
+        LuaEngine.singleton.SetVariable("ScriptableMonster", "test", "Set variable from java");
     }
 
     @Override
     public void tick(Level level, float delta) {
         luaInstance.tick(level, delta);
-        LuaEngine.singleton.invoke("tick");
+        LuaEngine.singleton.GetFunction("ScriptableMonster", "tick").call(LuaValue.valueOf(delta));
         SyncJavaWithLua();
     }
 

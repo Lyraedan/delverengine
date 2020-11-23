@@ -61572,3 +61572,64 @@ com.badlogic.gdx.utils.GdxRuntimeException: File not found: levels\first-death-s
 	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
 	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
 
+Fatal error in Game loop!
+
+org.luaj.vm2.LuaError: script:30 attempt to perform arithmetic __div on number and table
+	at org.luaj.vm2.LuaValue.error(Unknown Source)
+	at org.luaj.vm2.LuaValue.arithmtwith(Unknown Source)
+	at org.luaj.vm2.LuaValue.divInto(Unknown Source)
+	at org.luaj.vm2.LuaDouble.div(Unknown Source)
+	at org.luaj.vm2.LuaClosure.execute(Unknown Source)
+	at org.luaj.vm2.LuaClosure.call(Unknown Source)
+	at com.zel.lua.engine.LuaEngine.invoke(LuaEngine.java:64)
+	at com.zel.lua.entity.LuaMonster.tick(LuaMonster.java:40)
+	at com.interrupt.dungeoneer.game.Level.tickEntityList(Level.java:3209)
+	at com.interrupt.dungeoneer.game.Level.tick(Level.java:3183)
+	at com.interrupt.dungeoneer.game.Game.tick(Game.java:536)
+	at com.interrupt.dungeoneer.GameManager.tick(GameManager.java:113)
+	at com.interrupt.dungeoneer.screens.GameScreen.render(GameScreen.java:73)
+	at com.badlogic.gdx.Game.render(Game.java:46)
+	at com.interrupt.dungeoneer.editor.EditorApplication.render(EditorApplication.java:563)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
+
+Fatal error in Game loop!
+
+org.luaj.vm2.LuaError: script:30 attempt to perform arithmetic __div on number and table
+	at org.luaj.vm2.LuaValue.error(Unknown Source)
+	at org.luaj.vm2.LuaValue.arithmtwith(Unknown Source)
+	at org.luaj.vm2.LuaValue.divInto(Unknown Source)
+	at org.luaj.vm2.LuaDouble.div(Unknown Source)
+	at org.luaj.vm2.LuaClosure.execute(Unknown Source)
+	at org.luaj.vm2.LuaClosure.call(Unknown Source)
+	at com.zel.lua.engine.LuaEngine.invoke(LuaEngine.java:64)
+	at com.zel.lua.entity.LuaMonster.tick(LuaMonster.java:40)
+	at com.interrupt.dungeoneer.game.Level.tickEntityList(Level.java:3209)
+	at com.interrupt.dungeoneer.game.Level.tick(Level.java:3183)
+	at com.interrupt.dungeoneer.game.Game.tick(Game.java:536)
+	at com.interrupt.dungeoneer.GameManager.tick(GameManager.java:113)
+	at com.interrupt.dungeoneer.screens.GameScreen.render(GameScreen.java:73)
+	at com.badlogic.gdx.Game.render(Game.java:46)
+	at com.interrupt.dungeoneer.editor.EditorApplication.render(EditorApplication.java:563)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
+
+Fatal error in Game loop!
+
+org.luaj.vm2.LuaError: attempt to index ? (a nil value)
+	at org.luaj.vm2.LuaValue.error(Unknown Source)
+	at org.luaj.vm2.LuaValue.indexerror(Unknown Source)
+	at org.luaj.vm2.LuaValue.gettable(Unknown Source)
+	at org.luaj.vm2.LuaValue.get(Unknown Source)
+	at org.luaj.vm2.LuaValue.get(Unknown Source)
+	at com.zel.lua.entity.LuaMonster.tick(LuaMonster.java:41)
+	at com.interrupt.dungeoneer.game.Level.tickEntityList(Level.java:3209)
+	at com.interrupt.dungeoneer.game.Level.tick(Level.java:3183)
+	at com.interrupt.dungeoneer.game.Game.tick(Game.java:536)
+	at com.interrupt.dungeoneer.GameManager.tick(GameManager.java:113)
+	at com.interrupt.dungeoneer.screens.GameScreen.render(GameScreen.java:73)
+	at com.badlogic.gdx.Game.render(Game.java:46)
+	at com.interrupt.dungeoneer.editor.EditorApplication.render(EditorApplication.java:563)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:225)
+	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:126)
+
