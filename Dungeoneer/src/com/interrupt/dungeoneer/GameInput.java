@@ -11,6 +11,7 @@ import com.interrupt.dungeoneer.game.Options;
 import com.interrupt.dungeoneer.input.Actions;
 import com.interrupt.dungeoneer.input.Actions.Action;
 import com.interrupt.dungeoneer.input.GamepadManager;
+import com.zel.lua.input.LuaInputHandler;
 
 public class GameInput implements InputProcessor {
 	
@@ -87,6 +88,10 @@ public class GameInput implements InputProcessor {
 		if (code > 0 && code < keysDown.length) {
 			if(keysDown[code] == false) keyEvents.add(code);
 			keysDown[code] = true;
+			if(LuaInputHandler.instance != null) {
+				LuaInputHandler.instance.keys[code] = true;
+				//LuaInputHandler.instance.keyPressed(code);
+			}
 		}
 		
 		return false;
@@ -104,6 +109,10 @@ public class GameInput implements InputProcessor {
 		
 		if (code > 0 && code < keysDown.length) {
 			keysDown[code] = false;
+			if(LuaInputHandler.instance != null) {
+				LuaInputHandler.instance.keys[code] = false;
+				//LuaInputHandler.instance.keyPressed(code);
+			}
 		}
 		
 		return false;
@@ -329,7 +338,13 @@ public class GameInput implements InputProcessor {
 	public boolean isDropPressed() { return checkKeyDown(Action.DROP) || gamepadManager.controllerState.drop; }
 
 	public boolean isJumpPressed() { return isActionNewlyRequested(Action.JUMP); }
-	
+
+	public boolean isCrouchPressed() { return checkKeyDown(Action.CROUCH); }
+
+	public boolean isPronePressed() { return checkKeyDown(Action.PRONE); }
+
+	public boolean isSprintPressed() { return checkKeyDown(Action.SPRINT); }
+
 	public boolean doUseAction() {
 		return isActionNewlyRequested(Action.USE);
 	}

@@ -41,6 +41,7 @@ import com.interrupt.dungeoneer.tiles.ExitTile;
 import com.interrupt.dungeoneer.tiles.Tile;
 import com.interrupt.helpers.PlayerHistory;
 import com.interrupt.managers.StringManager;
+import javafx.scene.input.KeyCode;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -67,11 +68,19 @@ public class Player extends Actor {
 	/** Player eye height. */
 	public float eyeHeight = 0.12f;
 
+	public float standingHeight = 0.12f;
+	public float crouchHeight = 0f;
+	public float proneHeight = -0.25f;
+
 	/** Head bob speed. */
 	public float headBobSpeed = 0.319f;
 
 	/** Head bob height. */
 	public float headBobHeight = 0.3f;
+
+	public float headBobStanding = 0.319f;
+	public float headBobCrouch = 0.225f;
+	public float headBobProne = 0.110f;
 
 	public boolean hasAttacked;
 
@@ -107,6 +116,10 @@ public class Player extends Actor {
 	private float lastSplashTime = 0;
 
 	private float stepHeight = 0.35f;
+	private float stepStanding = 0.35f;
+	private float crouchStep = 0.23f;
+	private float proneStep = 0.12f;
+
 	private float lastZ;
 
 	public boolean isHoldingOrb = false;
@@ -138,6 +151,10 @@ public class Player extends Actor {
 
 	float walkVel = 0.05f;
 	float walkSpeed = 0.15f;
+	float sprintMul = 1.15f;
+	float standSpeed = 0.15f;
+	float crouchSpeed = 0.075f;
+	float proneSpeed = 0.025f;
 	float minWalkSpeed = 0.01f;
 	float rotSpeed = 0.009f;
 	float maxRot = 0.06f;
@@ -788,7 +805,7 @@ public class Player extends Actor {
 			else if(rot < 0) rot = rot % 6.28318531f;
 		}
 
-		boolean up = false, down = false, left = false, right = false, turnLeft = false, turnRight = false, turnUp = false, turnDown = false, attack = false, jump = false;
+		boolean up = false, down = false, left = false, right = false, turnLeft = false, turnRight = false, turnUp = false, turnDown = false, attack = false, jump = false, crouch = false, prone = false, sprint = false;
 
         if(!isDead && !isInOverlay) {
             up = input.isMoveForwardPressed();
@@ -801,7 +818,36 @@ public class Player extends Actor {
             turnDown = input.isLookDownPressed();
             attack = input.isAttackPressed() || controllerState.attack;
             jump = input.isJumpPressed();
+            crouch = input.isCrouchPressed();
+            prone = input.isPronePressed();
+            sprint = input.isSprintPressed();
         }
+
+        //eyeHeight = (prone ? proneHeight : (crouch ? crouchHeight : standingHeight));
+
+		if(prone) {
+			eyeHeight = proneHeight;
+			stepHeight = proneStep;
+			walkSpeed = proneSpeed;
+			headBobSpeed = headBobProne;
+		} else if(crouch) {
+			eyeHeight = crouchHeight;
+			stepHeight = crouchStep;
+			walkSpeed = crouchSpeed;
+			headBobSpeed = headBobCrouch;
+		} else {
+			eyeHeight = standingHeight;
+			stepHeight = stepStanding;
+			if(sprint) {
+				walkSpeed = walkSpeed * sprintMul;
+				headBobSpeed = headBobStanding * sprintMul;
+			} else {
+				walkSpeed = standSpeed;
+				headBobSpeed = headBobStanding;
+			}
+		}
+
+
 
 		// Update player visibility
 		Color lightColor = level.getLightColorAt(x, y, z, null, t_vislightColor);

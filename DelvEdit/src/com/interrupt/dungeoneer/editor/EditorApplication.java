@@ -75,6 +75,7 @@ import com.interrupt.managers.MonsterManager;
 import com.interrupt.managers.StringManager;
 import com.interrupt.utils.JsonUtil;
 import com.noise.PerlinNoise;
+import com.zel.lua.engine.LuaEngine;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -343,6 +344,9 @@ public class EditorApplication implements ApplicationListener {
 		config.addIcon("icon-128.png", Files.FileType.Internal); // 128x128 icon (mac OS)
 		config.addIcon("icon-32.png", Files.FileType.Internal);  // 32x32 icon (Windows + Linux)
 		config.addIcon("icon-16.png", Files.FileType.Internal);  // 16x16 icon (Windows)
+
+		// Setup Zel's lua engine
+		new LuaEngine();
 
 		new LwjglApplication(this, config) {
 		    public void close() {

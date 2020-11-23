@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Game" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
     <option name="MAIN_CLASS_NAME" value="com.interrupt.dungeoneer.DesktopStarter" />
     <module name="delverengine.DungeoneerDesktop.main" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Dungeoneer" />

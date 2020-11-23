@@ -12,6 +12,7 @@ import com.interrupt.dungeoneer.game.Level;
 import com.interrupt.dungeoneer.game.Options;
 import com.interrupt.dungeoneer.screens.*;
 import com.interrupt.utils.JsonUtil;
+import com.zel.lua.engine.LuaEngine;
 
 public class GameApplication extends Game {
 	
@@ -45,7 +46,10 @@ public class GameApplication extends Game {
         gameoverScreen = new GameOverScreen(gameManager);
         levelChangeScreen = new LevelChangeScreen(gameManager);
         winScreen = new WinScreen(gameManager);
-        
+
+        // Initialize Ze's lua engine
+        new LuaEngine();
+
         setScreen(new SplashScreen());
 	}
 	
@@ -63,7 +67,10 @@ public class GameApplication extends Game {
         mainScreen = new GameScreen(level, gameManager, input);
         gameoverScreen = new GameOverScreen(gameManager);
         levelChangeScreen = new LevelChangeScreen(gameManager);
-        
+
+		// Initialize Ze's lua engine
+		new LuaEngine();
+
         setScreen(mainScreen);
 	}
 
