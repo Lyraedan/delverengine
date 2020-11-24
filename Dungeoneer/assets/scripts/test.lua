@@ -37,8 +37,16 @@ end
 
 function ScriptableEntity.tick(level, delta)
 
-	print(keyPressed("3"))
-
+	if keyPressed(Key_W) then
+		print("W was pressed!");
+	elseif keyPressed(Key_A) then
+		print("A was pressed!");
+	elseif keyPressed(Key_S) then
+		print("S was pressed!");
+	elseif keyPressed(Key_D) then
+		print("D was pressed!");
+	end
+	
 	timer = timer + 1;
 
 	if timer <= maxTimer then

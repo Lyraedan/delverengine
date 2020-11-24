@@ -1,5 +1,6 @@
 package com.zel.lua.input;
 
+import com.badlogic.gdx.Input;
 import com.zel.lua.engine.LuaEngine;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
@@ -24,7 +25,7 @@ public class LuaInputHandler {
             @Override
             public LuaValue call(LuaValue arg) {
                 int keyCode = arg.toint();
-                String key = KeyEvent.getKeyText(keyCode);
+                String key = Input.Keys.toString(keyCode); //KeyEvent.getKeyText(keyCode);
                 LuaEngine.singleton.GetFunction(module, "OnKeyPressed").call(LuaValue.valueOf(key));
                 return LuaValue.valueOf(keyPressed(keyCode));
             }
@@ -34,7 +35,7 @@ public class LuaInputHandler {
             @Override
             public LuaValue call(LuaValue arg) {
                 int keyCode = arg.toint();
-                String key = KeyEvent.getKeyText(keyCode);
+                String key = Input.Keys.toString(keyCode); //KeyEvent.getKeyText(keyCode);
                 LuaEngine.singleton.GetFunction(module, "OnKeyReleased").call(LuaValue.valueOf(key));
                 return LuaValue.valueOf(keyReleased(keyCode));
             }
