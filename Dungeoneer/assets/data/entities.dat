@@ -1,5 +1,11 @@
 {
     "entities": {
+        "ZelsScriptables": {
+            "LuaEntity": {
+                "class": "com.zel.lua.entity.LuaEntity",
+                "tex": 1
+            }
+        },
         "Areas": {
             "Spawn Blocker": {
                 "class": "com.interrupt.dungeoneer.entities.areas.SpawnBlockerArea",

@@ -40,6 +40,7 @@ import com.interrupt.managers.StringManager;
 import com.interrupt.utils.JsonUtil;
 import com.interrupt.utils.Logger;
 import com.interrupt.utils.OSUtils;
+import com.zel.lua.engine.LuaEngine;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -129,6 +130,9 @@ public class Game {
 
 	public void loadManagers() {
 		modManager = Game.getModManager();
+
+		// Setup Zel's lua engine
+		new LuaEngine();
 
 		// Load item data
 		ItemManager im = modManager.loadItemManager(gameData.itemDataFiles);

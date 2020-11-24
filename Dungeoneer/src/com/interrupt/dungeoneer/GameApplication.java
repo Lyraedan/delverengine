@@ -48,7 +48,7 @@ public class GameApplication extends Game {
         winScreen = new WinScreen(gameManager);
 
         // Initialize Ze's lua engine
-        new LuaEngine();
+        //new LuaEngine();
 
         setScreen(new SplashScreen());
 	}
@@ -69,7 +69,7 @@ public class GameApplication extends Game {
         levelChangeScreen = new LevelChangeScreen(gameManager);
 
 		// Initialize Ze's lua engine
-		new LuaEngine();
+		//new LuaEngine();
 
         setScreen(mainScreen);
 	}

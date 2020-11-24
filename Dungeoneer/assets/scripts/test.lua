@@ -1,6 +1,7 @@
-ScriptableMonster = {};
--- Create a new instance of the Monster class
-monster = luajava.newInstance("com.interrupt.dungeoneer.entities.Monster");
+-- This is the module
+ScriptableEntity = {};
+-- Create a new instance of the ScriptableEntity class
+ScriptableEntity.entity = luajava.newInstance("com.zel.lua.entity.ScriptableEntity");
 
 -- Absolute position
 x = 0f;
@@ -12,36 +13,60 @@ xa = 0f;
 ya = 0f;
 za = 0f;
 
-speed = 0.002f;
+-- The texture index
+tex = 0;
 
-test = "Hello world";
+-- Should the Entity be ticked and drawn?
+isActive = true;
 
-function ScriptableMonster.init()
-x = monster.x;
-y = monster.y;
-z = monster.z;
+speed = 0.02f;
 
-xa = monster.xa;
-ya = monster.ya;
-za = monster.za;
+local timer = 0;
+local maxTimer = 100;
+local flip = false;
 
-print(test);
+function ScriptableEntity.init()
+	x = ScriptableEntity.entity.x;
+	y = ScriptableEntity.entity.y;
+	z = ScriptableEntity.entity.z;
 
+	xa = ScriptableEntity.entity.xa;
+	ya = ScriptableEntity.entity.ya;
+	za = ScriptableEntity.entity.za;
 end
 
-function ScriptableMonster.tick(delta)
-print("Delta");
-print(delta);
-xa = xa + (speed / delta);
---print("----");
---print(xa);
---print(ya);
---print(za);
+function ScriptableEntity.tick(level, delta)
 
-print("---");
-print(test);
+	print(keyPressed("3"))
 
-monster.xa = xa;
-monster.ya = ya;
-monster.za = za;
+	timer = timer + 1;
+
+	if timer <= maxTimer then
+		xa = (speed / delta);
+		if not flip then
+			ya = (speed / delta);
+		else 
+			ya = -(speed / delta);
+		end
+	elseif timer > maxTimer and timer <= maxTimer * 2 then
+		xa = -(speed / delta);
+		if not flip then
+			ya = -(speed / delta);
+		else 
+			ya = (speed / delta);
+		end
+	else
+		timer = 0;
+		if flip then
+			flip = false
+		else 
+			flip = true
+		end
+	end
+	
+	ScriptableEntity.entity.xa = xa;
+	ScriptableEntity.entity.ya = ya;
+	ScriptableEntity.entity.za = za;
 end
+
+return ScriptableEntity;

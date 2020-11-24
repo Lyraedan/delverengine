@@ -11,7 +11,11 @@ import com.interrupt.dungeoneer.game.Options;
 import com.interrupt.dungeoneer.input.Actions;
 import com.interrupt.dungeoneer.input.Actions.Action;
 import com.interrupt.dungeoneer.input.GamepadManager;
+import com.zel.lua.engine.LuaEngine;
 import com.zel.lua.input.LuaInputHandler;
+import org.luaj.vm2.LuaValue;
+
+import java.awt.event.KeyEvent;
 
 public class GameInput implements InputProcessor {
 	
@@ -90,7 +94,7 @@ public class GameInput implements InputProcessor {
 			keysDown[code] = true;
 			if(LuaInputHandler.instance != null) {
 				LuaInputHandler.instance.keys[code] = true;
-				//LuaInputHandler.instance.keyPressed(code);
+				LuaInputHandler.instance.pressed.call(LuaValue.valueOf(code));
 			}
 		}
 		
@@ -111,7 +115,7 @@ public class GameInput implements InputProcessor {
 			keysDown[code] = false;
 			if(LuaInputHandler.instance != null) {
 				LuaInputHandler.instance.keys[code] = false;
-				//LuaInputHandler.instance.keyPressed(code);
+				LuaInputHandler.instance.released.call(LuaValue.valueOf(code));
 			}
 		}
 		

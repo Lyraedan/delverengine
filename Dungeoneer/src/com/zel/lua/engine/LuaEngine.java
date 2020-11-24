@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.interrupt.dungeoneer.game.Game;
 import com.sun.org.apache.bcel.internal.classfile.JavaClass;
+import com.zel.lua.input.LuaInputHandler;
 import org.luaj.vm2.*;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,10 +24,13 @@ public class LuaEngine {
 
     public Globals globals = JsePlatform.standardGlobals();
 
+    public LuaInputHandler inputHandler;
+
     public LuaEngine() {
         System.out.println("Setting up the " + AUTHOR + "'s lua scripting engine");
         if(singleton == null) singleton = this;
         else System.err.println("Only one instance of the lua engine can exist at a time!");
+        //inputHandler = new LuaInputHandler();
         SetupAPI();
         System.out.println("Successfully set up " + AUTHOR + "'s lua engine");
     }
@@ -96,5 +101,9 @@ public class LuaEngine {
      **/
     public void SetVariable(String module, String var, Object val) {
         globals.get(module).set(LuaValue.valueOf(var), LuaValue.userdataOf(val));
+    }
+
+    public static boolean readyForUse() {
+        return singleton != null;
     }
 }

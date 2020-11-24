@@ -346,7 +346,7 @@ public class EditorApplication implements ApplicationListener {
 		config.addIcon("icon-16.png", Files.FileType.Internal);  // 16x16 icon (Windows)
 
 		// Setup Zel's lua engine
-		new LuaEngine();
+		//new LuaEngine();
 
 		new LwjglApplication(this, config) {
 		    public void close() {
