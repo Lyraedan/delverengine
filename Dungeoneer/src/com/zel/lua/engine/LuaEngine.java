@@ -3,17 +3,11 @@ package com.zel.lua.engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.interrupt.dungeoneer.game.Game;
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import com.zel.lua.input.LuaInputHandler;
 import org.luaj.vm2.*;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import org.luaj.vm2.lib.jse.JsePlatform;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class LuaEngine {
 
@@ -38,6 +32,7 @@ public class LuaEngine {
     public void SetupAPI() {
         LuaValue core = loadScript("/ZelsLuaApi/core.lua");
         LuaValue input = loadScript("/ZelsLuaApi/input.lua");
+        LuaValue player = loadScript("/ZelsLuaApi/player.lua");
     }
 
     /**
@@ -88,12 +83,12 @@ public class LuaEngine {
         return globals.get(func).call();
     }
 
-    public LuaValue GetFunction(String function) {
-        return globals.get(function);
+    public LuaValue GetFunction(String ref) {
+        return globals.get(ref);
     }
 
-    public LuaValue GetFunction(String module, String function) {
-        return globals.get(module).get(function);
+    public LuaValue GetFunction(String module, String ref) {
+        return globals.get(module).get(ref);
     }
 
     /**

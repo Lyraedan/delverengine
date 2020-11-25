@@ -41,6 +41,7 @@ import com.interrupt.dungeoneer.tiles.ExitTile;
 import com.interrupt.dungeoneer.tiles.Tile;
 import com.interrupt.helpers.PlayerHistory;
 import com.interrupt.managers.StringManager;
+import com.zel.lua.entity.LuaPlayer;
 import javafx.scene.input.KeyCode;
 
 import java.text.MessageFormat;

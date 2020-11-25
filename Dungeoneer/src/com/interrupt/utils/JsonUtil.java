@@ -80,12 +80,12 @@ public class JsonUtil {
     public static <T> T fromJson(Class<T> type, String json) {
         Json json_ = getJson();
         T result;
-
         try {
             result = json_.fromJson(type, json);
         }
         catch (Exception ex) {
             Gdx.app.log("Serialization", String.format("Error: Failed to deserialize JSON: \"%s\"", json));
+            ex.printStackTrace();
             throw ex;
         }
 

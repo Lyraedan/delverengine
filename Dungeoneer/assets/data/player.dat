@@ -1,5 +1,5 @@
 {
-	"class": "com.interrupt.dungeoneer.entities.Player",
+	"class": "com.zel.lua.entity.LuaPlayer",
 	"maxHp": 8,
 	"hp": 8,
 	"startingInventory": [

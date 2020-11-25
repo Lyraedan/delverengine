@@ -76,6 +76,7 @@ import com.interrupt.managers.StringManager;
 import com.interrupt.utils.JsonUtil;
 import com.noise.PerlinNoise;
 import com.zel.lua.engine.LuaEngine;
+import com.zel.lua.entity.LuaPlayer;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -3670,7 +3671,7 @@ public class EditorApplication implements ApplicationListener {
         	Vector3 cameraPosition = cameraController.getPosition();
         	Vector2 cameraRotation = cameraController.getRotation();
 
-            player = new Player();
+            player = new LuaPlayer();
             player.x = cameraPosition.x - 0.5f;
             player.y = cameraPosition.y - 0.5f;
             player.z = cameraPosition.z;

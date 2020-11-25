@@ -18,7 +18,6 @@ public class LuaInputHandler {
     public OneArgFunction pressed, released;
 
     public LuaInputHandler() {
-        System.out.println("Setting up lua input handler");
         instance = this; //(LuaInputHandler) LuaEngine.singleton.GetFunction(module, "input").touserdata();
 
         pressed = new OneArgFunction() {

@@ -19,8 +19,6 @@ public class LuaEntity extends Entity {
     @EditorProperty(group = "Scripting")
     public String module = "ScriptableEntity";
 
-    private boolean isReady = false;
-
     public LuaEntity() { }
 
     @Override
@@ -45,9 +43,7 @@ public class LuaEntity extends Entity {
      * Used for init
      * */
     void SyncLuaWithJava() {
-        luaInstance.x = x;
-        luaInstance.y = y;
-        luaInstance.z = z;
+        luaInstance.setPosition(x, y, z);
 
         luaInstance.xa = xa;
         luaInstance.ya = ya;

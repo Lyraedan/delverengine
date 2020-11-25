@@ -33,6 +33,7 @@ import com.interrupt.dungeoneer.overlays.OptionsOverlay;
 import com.interrupt.dungeoneer.ui.UiSkin;
 import com.interrupt.managers.StringManager;
 import com.interrupt.utils.JsonUtil;
+import com.zel.lua.entity.LuaPlayer;
 
 import java.text.MessageFormat;
 
@@ -57,7 +58,7 @@ public class MainMenuScreen extends BaseScreen {
 
     Array<Table> saveSlotUi = new Array<Table>();
     
-    Player errorPlayer = new Player();
+    Player errorPlayer = new LuaPlayer();
     
     Array<Level> dungeonInfo = null;
 

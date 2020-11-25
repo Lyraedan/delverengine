@@ -41,6 +41,7 @@ import com.interrupt.utils.JsonUtil;
 import com.interrupt.utils.Logger;
 import com.interrupt.utils.OSUtils;
 import com.zel.lua.engine.LuaEngine;
+import com.zel.lua.entity.LuaPlayer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -209,12 +210,12 @@ public class Game {
 
 		// try loading the player template
 		try {
-			Player playerTemplate = JsonUtil.fromJson(Player.class, Game.findInternalFileInMods("data/" + gameData.playerDataFile));
+			Player playerTemplate = JsonUtil.fromJson(LuaPlayer.class, Game.findInternalFileInMods("data/" + gameData.playerDataFile));
 			if(playerTemplate != null) player = playerTemplate;
 		}
 		catch(Exception ex) {
 			Gdx.app.error("Delver", ex.getMessage());
-			player = new Player(this);
+			player = new LuaPlayer(this);
 		}
 
         // Save version is always up to date in the editor
@@ -427,11 +428,11 @@ public class Game {
 
 			// try loading the player template
 			try {
-				Player playerTemplate = JsonUtil.fromJson(Player.class, Game.findInternalFileInMods("data/" + gameData.playerDataFile));
+				Player playerTemplate = JsonUtil.fromJson(LuaPlayer.class, Game.findInternalFileInMods("data/" + gameData.playerDataFile));
 				if (playerTemplate != null) player = playerTemplate;
 			} catch (Exception ex) {
 				Gdx.app.error("Delver", ex.getMessage());
-				player = new Player(this);
+				player = new LuaPlayer(this);
 			}
 
 			// Set progression
@@ -452,7 +453,7 @@ public class Game {
 				level = dataLevels.get(levelNum);
 			} else {
 				levelNum = -1;
-				player = new Player(this);
+				player = new LuaPlayer(this);
 				player.level = 2;
 				player.gold = progression.gold;
 				player.maxHp = 12;
@@ -1081,7 +1082,7 @@ public class Game {
 			{
 				Gdx.app.log("DelverLifeCycle", "Loading player from " + file.path());
 
-				player = JsonUtil.fromJson(Player.class, file);
+				player = JsonUtil.fromJson(LuaPlayer.class, file);
 			}
 			else return false;
 

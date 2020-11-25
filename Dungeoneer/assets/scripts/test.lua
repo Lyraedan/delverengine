@@ -4,22 +4,22 @@ ScriptableEntity = {};
 ScriptableEntity.entity = luajava.newInstance("com.zel.lua.entity.ScriptableEntity");
 
 -- Absolute position
-x = 0f;
-y = 0f;
-z = 0f;
+local x = 0f;
+local y = 0f;
+local z = 0f;
 
 -- Velocity | takes collision into account
-xa = 0f;
-ya = 0f;
-za = 0f;
+local xa = 0f;
+local ya = 0f;
+local za = 0f;
 
 -- The texture index
-tex = 0;
+local tex = 0;
 
 -- Should the Entity be ticked and drawn?
-isActive = true;
+local isActive = true;
 
-speed = 0.02f;
+local speed = 0.02f;
 
 local timer = 0;
 local maxTimer = 100;
@@ -36,17 +36,6 @@ function ScriptableEntity.init()
 end
 
 function ScriptableEntity.tick(level, delta)
-
-	if keyPressed(Key_W) then
-		print("W was pressed!");
-	elseif keyPressed(Key_A) then
-		print("A was pressed!");
-	elseif keyPressed(Key_S) then
-		print("S was pressed!");
-	elseif keyPressed(Key_D) then
-		print("D was pressed!");
-	end
-	
 	timer = timer + 1;
 
 	if timer <= maxTimer then
