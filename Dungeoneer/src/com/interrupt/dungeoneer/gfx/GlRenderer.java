@@ -75,7 +75,7 @@ public class GlRenderer {
 	public TextureRegion miniMap;
 	public boolean showMap = false;
 
-	public BitmapFont font = null;
+	public static BitmapFont font = null;
 
 	protected TextureAtlas wallTextures;
 	protected TextureAtlas spriteTextures;

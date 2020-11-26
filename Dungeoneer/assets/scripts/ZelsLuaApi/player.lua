@@ -35,12 +35,16 @@ za = Player.controller.za;
 rot = Player.controller.rot;
 yrot = Player.controller.yrot;
 
+gfxLoadImage("Test", "C:/Users/luke/Downloads/minidoku.png");
+
 end
 
 function Player.tick(level, delta) 
 
 rot = Player.controller.rot;
 yrot = Player.controller.yrot;
+
+gfxDrawText("Hello world", 0, 0, 0.05f, 0xFFFFFFFF);
 
 local move = speed / delta;
 

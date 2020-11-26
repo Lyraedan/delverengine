@@ -3,6 +3,7 @@ package com.zel.lua.engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.interrupt.dungeoneer.game.Game;
+import com.zel.lua.graphics.LuaGraphics;
 import com.zel.lua.input.LuaInputHandler;
 import org.luaj.vm2.*;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -32,6 +33,7 @@ public class LuaEngine {
     public void SetupAPI() {
         LuaValue core = loadScript("/ZelsLuaApi/core.lua");
         LuaValue input = loadScript("/ZelsLuaApi/input.lua");
+        LuaValue gfx = loadScript("/ZelsLuaApi/graphics.lua");
         LuaValue player = loadScript("/ZelsLuaApi/player.lua");
     }
 
